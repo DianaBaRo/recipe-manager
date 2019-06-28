@@ -1,0 +1,20 @@
+<%= render partial: 'layouts/errors', locals: {object: @comment}  %>
+
+<%= form_for(@comment) do |f|%>
+  <% if params[:recipe_id] %>
+    <%= f.hidden_field :recipe_id %>
+  <% else %>
+    <div>
+      <%= f.label :recipe_id, "Select a Recipe" %>
+      <%= f.collection_select :recipe_id, Recipe.all, :id, :name, include_blank: true %>
+    </div>
+  <% end %>
+  <div>
+    <%= f.label :content %>
+    <%= f.text_area :content, size: "25x10" %>
+  </div>
+  <br>
+
+  <%= f.submit %>
+
+<% end %>
