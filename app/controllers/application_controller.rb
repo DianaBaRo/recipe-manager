@@ -3,10 +3,7 @@ class ApplicationController < ActionController::Base
     helper_method :current_user, :require_login, :admin_only
 
     def current_user
-      #The session[:user_id] has been set in my sessions controller
-      if session[:user_id].present?
-        user = User.find_by(:id => session[:user_id])
-      end
+      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
     end
 
     def require_login
@@ -22,4 +19,5 @@ class ApplicationController < ActionController::Base
         redirect_to user_path(current_user)
       end
     end
+
 end
