@@ -1,2 +1,17 @@
-Welcome <%= @user.name%>!
-<%= link_to "Log out", logout_path %>
+<h1>Welcome <%= @user.name%></h1>
+
+<p><%= link_to "All our recipes", recipes_path %></p>
+
+<% if Category.all.size >= 1 %>
+  <%= link_to "Categories", categories_path %><br />
+<% end %>
+
+<p><%= link_to "Rate a recipe", new_rating_path %></p>
+
+<p><%= link_to "Comment a recipe", new_comment_path %></p>
+
+<% if @user.admin %>
+  <%= link_to "Add a recipe", new_recipe_path %><br />
+<% end %>
+  
+<p><%= link_to "Log out", logout_path, method: :delete %></p>
