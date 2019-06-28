@@ -1,0 +1,18 @@
+<% if !@recipe %>
+  <%= form_tag("/comments", method: "get") do %>
+    Comments by author:
+    <%= select_tag "user", options_from_collection_for_select(@users, "id", "name"), include_blank: true %><br /><br />
+    Comments by recipe:
+    <%= select_tag "recipe", options_from_collection_for_select(@recipes, "id", "name"), include_blank: true %><br /><br />
+    <%= submit_tag "Filter" %>
+  <% end %>
+<% else %>
+  <h1>Comments for <%= @recipe.name %></h1>
+<% end %>
+
+<% @comments.each do |c| %>
+  <div>
+    <h2><%= c.content %></h2>
+    <h3>by: <%= link_to c.user.name, user_path(c.user) %></h3>
+  </div>
+<% end %>
