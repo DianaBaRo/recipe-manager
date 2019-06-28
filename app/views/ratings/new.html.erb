@@ -1,0 +1,16 @@
+<%= render partial: 'layouts/errors', locals: {object: @rating}  %>
+
+<%= form_for(@rating) do |f|%>
+  <div>
+    <%= f.label :recipe_id, "Select a Recipe" %>
+    <%= f.collection_select :recipe_id, Recipe.all, :id, :name, include_blank: true %>
+  </div>
+  <div>
+    <%= f.label :score %>
+    <%= f.number_field :score %>
+  </div>
+  <br>
+
+  <%= f.submit %>
+
+<% end %>
