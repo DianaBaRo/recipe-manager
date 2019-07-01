@@ -14,7 +14,7 @@ class Recipe < ApplicationRecord
 
     validates :name, presence: true
     validates :cooking_time, numericality: { only_integer: true }
-    validates :servings, numericality: { only_integer: true }
+    validates :servings, :numericality => { :greater_than_or_equal_to => 1, :less_than_or_equal_to => 20 }
     validates :directions, presence: true
 
     def delete_ingredients_from_recipe
