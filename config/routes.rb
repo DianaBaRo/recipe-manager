@@ -17,9 +17,13 @@ Rails.application.routes.draw do
   end
 
   resources :comments
+  resources :categories
+  resources :ingredients
 
   resources :recipes do
-    resources :comments, only: [:new, :index]
+    resources :comments, only: [:new, :create, :index]
+    resources :categories, only: [:new, :create, :index]
+    resources :ingredients, only: [:new, :create]
   end
 
   resources :ratings, only: [:new, :create]
