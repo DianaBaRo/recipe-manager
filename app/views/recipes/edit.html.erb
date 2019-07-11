@@ -17,29 +17,6 @@
     <%= f.label :directions %>
     <%= f.text_area :directions, size: "24x6" %><br>
 
-    <p>Add categories:</p><br>
-    <%= f.fields_for :recipe_categories do |recipe_category| %>
-      <p>
-      Select Category: <%= recipe_category.collection_select :category_id, Category.all, :id, :name, include_blank: 'Select Category' %>
-      <%= recipe_category.fields_for :category, @recipe.categories.build do |category| %>
-        Or Create New Category: <%= category.text_field :name %>
-      <% end %>
-      </p>
-    <% end %>
-
-    
-    <p>Add Ingredients:</p><br>
-    <%= f.fields_for :recipe_ingredients do |recipe_ingredient| %>
-      <p>
-      Select Ingredient: <%= recipe_ingredient.collection_select :ingredient_id, Ingredient.all, :id, :name, include_blank: 'Select Ingredient' %>
-      <%= recipe_ingredient.fields_for :ingredient, @recipe.ingredients.build do |ingredient| %>
-        Or Create New Ingredient: <%= ingredient.text_field :name %>
-      <% end %>
-      <%= recipe_ingredient.label :quantity %>
-      <%= recipe_ingredient.text_field :quantity %><br />
-      </p>
-    <% end %>
-
     <%= f.submit "Submit" %>
     
     <% end %>

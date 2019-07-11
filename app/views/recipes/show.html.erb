@@ -3,31 +3,24 @@
   <p>Cooking time in minutes: <%= @recipe.cooking_time %></p>
   <p>Servings: <%= @recipe.servings %></p>
   <p>Directions: <%= @recipe.directions %></p>
-
-  <% if @recipe.categories.size >= 1 %>
-    <p>Categories: </p>
-    <% @recipe.recipe_categories.each do |recipe_category| %>
-      <% if recipe_category.category %>
-        <%= recipe_category.category.name %></p>
-      <% end %>
-    <% end %>
+  <p>Ingredients: <% @recipe.ingredients.each do |ingredient| %></p>
+    <p><%= ingredient.name %></p>
   <% end %>
-
-  <% if @recipe.ingredients.size >= 1 %>
-    <p>Ingredients:</p>
-    <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
-      <% if recipe_ingredient.ingredient %>
-        <%= recipe_ingredient.ingredient.name %> - Quantity: <%= recipe_ingredient.quantity %>
-      <% end %>
-    <% end %>
+  <p>Categories: <% @recipe.categories.each do |category| %></p>
+    <p><%= category.name %></p>
   <% end %>
   
+  
   <strong><p>Created by <%= @recipe.user.name %></p></strong>
-  <p><%= link_to "Comment this recipe", new_recipe_comment_path(@recipe) %></p>
+
   <% if @recipe.user.admin %>
+    <p><%= link_to "Add a ingredient to this recipe", new_recipe_ingredient_path(@recipe) %></p>
+    <p><%= link_to "Add a category to this recipe", new_recipe_category_path(@recipe) %></p>
     <p><%= link_to "Edit this recipe", edit_recipe_path(@recipe) %></p>
   <% end %>
   <p><%= link_to "Delete this recipe", @recipe, method: :delete, data: { confirm: "Are you sure you want to delete this recipe?" } %></p>
+
+  <p><%= link_to "Comment this recipe", new_recipe_comment_path(@recipe) %></p>
 
   <% if @recipe.ratings.size >= 1 %>
     <p>Ratings:</p>

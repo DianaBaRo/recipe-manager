@@ -17,19 +17,14 @@ class RecipesController < ApplicationController
     
   def new
     @recipe = Recipe.new
-    5.times { @recipe.recipe_ingredients.build }
-    2.times { @recipe.recipe_categories.build }
   end
   
   def create
-    recipe = current_user.recipes.create(recipe_params)
-    if recipe.save
-      recipe.add_ingredients_to_recipe(recipe_ingredient_params)
-      recipe.add_categories_to_recipe(recipe_category_params)
-      redirect_to recipe_path(recipe), notice: "Your recipe has successfully been added"
+    @recipe = current_user.recipes.create(recipe_params)
+    if @recipe.save
+      redirect_to recipe_path(@recipe)
     else
-      @recipe = Recipe.new
-      redirect_to new_recipe_path
+      render :new
     end
   end
 
@@ -39,20 +34,14 @@ class RecipesController < ApplicationController
 
   def edit 
     @recipe = Recipe.find_by_id(params[:id])
-    if @recipe
-      @ingredients = 2.times.collect { @recipe.recipe_ingredients.build }
-      @categories = 2.times.collect { @recipe.recipe_categories.build }
-    end
   end
   
   def update
-    recipe = Recipe.find_by_id(params[:id])
-    if recipe.update(recipe_params)
-      recipe.add_ingredients_to_recipe(recipe_ingredient_params)
-      recipe.add_categories_to_recipe(recipe_category_params)
-      redirect_to recipe_path(recipe)
+    @recipe = Recipe.find_by_id(params[:id])
+    if @recipe.update(recipe_params)
+      redirect_to recipe_path(@recipe)
     else
-      redirect_to new_recipe_path, alert: recipe.errors.full_messages.each {|m| m}.join
+      render :edit
     end
   end
 
@@ -64,15 +53,7 @@ class RecipesController < ApplicationController
 
   private
   def recipe_params
-    params.require(:recipe).permit(:name, :cooking_time, :servings, :directions)
-  end
-
-  def recipe_ingredient_params
-    params.require(:recipe).permit(recipe_ingredients_attributes: [:quantity, :ingredient_id, ingredient: [:name]])
-  end
-
-  def recipe_category_params
-    params.require(:recipe).permit(recipe_categories_attributes: [:category_id, category: [:name]])
+    params.require(:recipe).permit(:name, :cooking_time, :servings, :directions, :recipe_ingredients_attributes => [:ingredient_id, :quantity, :ingredients_attributes => [:name]])
   end
      
 end
