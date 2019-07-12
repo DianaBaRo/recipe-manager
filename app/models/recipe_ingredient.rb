@@ -7,5 +7,5 @@ class RecipeIngredient < ApplicationRecord
 
   validates :quantity, numericality: { only_integer: true }
   validates :ingredient_id, uniqueness: { scope: :recipe_id, message: "should be unique per recipe"}
-   
+
 end

@@ -4,8 +4,9 @@
   <p>Servings: <%= @recipe.servings %></p>
   <p>Directions: <%= @recipe.directions %></p>
   <% if @recipe.ingredients.size >= 1 %>
-    <p>Ingredients: <% @recipe.ingredients.each do |ingredient| %></p>
-      <p><%= ingredient.name %></p>
+    <p>Ingredients: <% @recipe.recipe_ingredients.each do |ri| %></p>
+      <p><%= ri.ingredient.name %></p>
+      <p><%= ri.quantity %></p>
     <% end %>
   <% end %>
   <% if @recipe.categories.size >= 1 %>

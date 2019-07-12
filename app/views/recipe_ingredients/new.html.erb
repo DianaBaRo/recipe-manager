@@ -12,7 +12,7 @@
   <%= f.label :ingredient_id, "Select an Ingredient" %>
   <%= f.collection_select :ingredient_id, Ingredient.all, :id, :name, include_blank: true %>
 
-  <%= f.fields_for :ingredients do |i| %>
+  <%= f.fields_for :ingredient, @ingredient do |i| %>
     <%= i.label :name, "Or create a new ingredient" %>
     <%= i.text_field :name %>
   <% end %>
