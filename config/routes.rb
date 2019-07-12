@@ -18,12 +18,12 @@ Rails.application.routes.draw do
 
   resources :comments
   resources :categories
-  resources :ingredients
+  resources :recipe_ingredients
 
   resources :recipes do
     resources :comments, only: [:new, :create, :index]
     resources :categories, only: [:new, :create, :index]
-    resources :ingredients, only: [:new, :create]
+    resources :recipe_ingredients, only: [:new, :create]
   end
 
   resources :ratings, only: [:new, :create]

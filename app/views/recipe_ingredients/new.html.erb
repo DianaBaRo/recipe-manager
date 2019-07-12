@@ -1,0 +1,27 @@
+<%= render partial: 'layouts/errors', locals: {object: @recipe_ingredient}  %>
+
+<%= form_for(@recipe_ingredient) do |f|%>
+  <% if params[:recipe_id] %>
+    <%= f.hidden_field :recipe_id %>
+  <% else %>
+    <div>
+      <%= f.label :recipe_id, "Select a Recipe" %>
+      <%= f.collection_select :recipe_id, Recipe.all, :id, :name, include_blank: true %>
+    </div>
+  <% end %>
+  <%= f.label :ingredient_id, "Select an Ingredient" %>
+  <%= f.collection_select :ingredient_id, Ingredient.all, :id, :name, include_blank: true %>
+
+  <%= f.fields_for :ingredients do |i| %>
+    <%= i.label :name, "Or create a new ingredient" %>
+    <%= i.text_field :name %>
+  <% end %>
+    <div>
+      <%= f.label :quantity %>
+      <%= f.text_field :quantity %>
+    </div>
+  <br>
+
+  <%= f.submit "Add ingredient" %>
+
+<% end %>
