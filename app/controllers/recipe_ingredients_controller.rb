@@ -3,8 +3,7 @@ class RecipeIngredientsController < ApplicationController
     
     def new
       if @recipe = Recipe.find_by_id(params[:recipe_id])
-        @recipe_ingredient = RecipeIngredient.new
-        @recipe_ingredient.recipe_id = @recipe.id
+        @recipe_ingredient = @recipe.recipe_ingredients.build
       else
         @recipe_ingredient = RecipeIngredient.new
       end

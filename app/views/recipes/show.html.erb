@@ -3,18 +3,22 @@
   <p>Cooking time in minutes: <%= @recipe.cooking_time %></p>
   <p>Servings: <%= @recipe.servings %></p>
   <p>Directions: <%= @recipe.directions %></p>
-  <p>Ingredients: <% @recipe.ingredients.each do |ingredient| %></p>
-    <p><%= ingredient.name %></p>
+  <% if @recipe.ingredients.size >= 1 %>
+    <p>Ingredients: <% @recipe.ingredients.each do |ingredient| %></p>
+      <p><%= ingredient.name %></p>
+    <% end %>
   <% end %>
-  <p>Categories: <% @recipe.categories.each do |category| %></p>
-    <p><%= category.name %></p>
+  <% if @recipe.categories.size >= 1 %>
+    <p>Categories: <% @recipe.categories.each do |category| %></p>
+      <p><%= category.name %></p>
+    <% end %>
   <% end %>
   
   
   <strong><p>Created by <%= @recipe.user.name %></p></strong>
 
   <% if @recipe.user.admin %>
-    <p><%= link_to "Add a ingredient to this recipe", new_recipe_ingredient_path(@recipe) %></p>
+    <p><%= link_to "Add a ingredient to this recipe", new_recipe_recipe_ingredient_path(@recipe) %></p>
     <p><%= link_to "Add a category to this recipe", new_recipe_category_path(@recipe) %></p>
     <p><%= link_to "Edit this recipe", edit_recipe_path(@recipe) %></p>
   <% end %>
