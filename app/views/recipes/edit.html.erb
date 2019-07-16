@@ -1,23 +1,7 @@
-<%= render partial: 'layouts/errors', locals: {object: @recipe}  %>
-
 <% if @recipe %>
-    <h1>Edit <%= @recipe.name %></h1>
 
-    <%= form_for @recipe do |f| %>
-
-    <%= f.label :name %>
-    <%= f.text_field :name %><br>
-
-    <%= f.label :cooking_time %><%= " in minutes" %>
-    <%= f.number_field :cooking_time %><br>
-
-    <%= f.label :servings %>
-    <%= f.number_field :servings %><br>
-
-    <%= f.label :directions %>
-    <%= f.text_area :directions, size: "24x6" %><br>
-
-    <%= f.submit "Submit" %>
-    
-    <% end %>
+  <h1>Edit <%= @recipe.name %></h1>
+  <%= render partial: 'layouts/errors', locals: {object: @recipe}  %>
+  <%= render 'form' %>
+  
 <% end %>

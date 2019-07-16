@@ -1,0 +1,19 @@
+<%= form_for(@recipe) do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+
+  <%= f.label :cooking_time %><%= " in minutes" %>
+  <%= f.number_field :cooking_time %><br>
+
+  <%= f.label :servings %>
+  <%= f.number_field :servings, min:1, max:20 %><br>
+
+  <%= f.label :directions %>
+  <%= f.text_area :directions, size: "24x6" %><br>
+
+  <p>Add a category</p>
+  <%= f.collection_select(:category_ids, Category.all, :id, :name, {include_blank: 'Select a category'}, { multiple: true, :style => "width:150px" }) %>
+
+  <%= f.submit "Submit" %>
+<% end %>

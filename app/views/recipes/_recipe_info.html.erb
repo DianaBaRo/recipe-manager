@@ -1,0 +1,44 @@
+<% if @recipe %>
+  <h1><%= @recipe.name %></h1>
+  <p>Cooking time in minutes: <%= @recipe.cooking_time %></p>
+  <p>Servings: <%= @recipe.servings %></p>
+  <p>Directions: <%= @recipe.directions %></p>
+  <% if not_empty @recipe.ingredients %>
+    <p>Ingredients: <% @recipe.recipe_ingredients.each do |ri| %></p>
+      <p><%= ri.ingredient.name %></p>
+      <p><%= ri.quantity %></p>
+    <% end %>
+  <% end %>
+  <% if not_empty @recipe.categories %>
+    <p>Categories: <% @recipe.categories.each do |category| %></p>
+      <p><%= category.name %></p>
+    <% end %>
+  <% end %>
+  
+  <strong><p>Created by <%= @recipe.user.name %></p></strong>
+
+  <% if current_user.admin %>
+    <p><%= link_to "Add an ingredient", new_recipe_recipe_ingredient_path(@recipe) %></p>
+    <p><%= link_to "Delete ingredient", recipe_recipe_ingredients_path(@recipe) %></p>
+    <p><%= link_to "Edit this recipe", edit_recipe_path(@recipe) %></p>
+    <p><%= link_to "Delete this recipe", @recipe, method: :delete, data: { confirm: "Are you sure you want to delete this recipe?" } %></p>
+  <% end %>
+
+  <p><%= link_to "Comment this recipe", new_recipe_comment_path(@recipe) %></p>
+
+  <% if not_empty @recipe.ratings %>
+    <p>Ratings:</p>
+    <% @recipe.ratings.each do |rating| %>
+      <p><%= rating.score %> star -
+      <strong><%= rating.user.name %></strong><br /></p>
+    <% end %>
+  <% end %>
+  
+  <% if not_empty @recipe.comments %>
+    <p><%= link_to "Comments:", recipe_comments_url(@recipe) %></p>
+    <% @recipe.comments.each do |comment| %>
+      <%= comment.content %>
+      <strong><%= comment.user.name %></strong><br />
+    <% end %>
+  <% end %>
+<% end %>
