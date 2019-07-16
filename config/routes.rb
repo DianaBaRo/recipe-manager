@@ -17,15 +17,20 @@ Rails.application.routes.draw do
   end
 
   resources :comments
-  resources :categories
-  resources :recipe_ingredients
 
   resources :recipes do
     resources :comments, only: [:new, :create, :index]
     resources :categories, only: [:new, :create, :index]
-    resources :recipe_ingredients, only: [:new, :create]
+    resources :recipe_ingredients, only: [:new, :create, :index]
+  end
+
+  resources :recipe_ingredients do
+    collection do
+      delete 'destroy_multiple'
+    end
   end
 
   resources :ratings, only: [:new, :create]
   
+  get 'newest_recipe' => 'recipes#newest_recipe'
 end
