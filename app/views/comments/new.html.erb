@@ -1,6 +1,6 @@
 <%= render partial: 'layouts/errors', locals: {object: @comment}  %>
 
-<%= form_for(@comment) do |f|%>
+<%= form_for([@comment.recipe, @comment]) do |f|%>
   <% if params[:recipe_id] %>
     <%= f.hidden_field :recipe_id %>
   <% else %>

@@ -1,6 +1,8 @@
+<p><%= flash[:error] %></p>
+
 <%= render partial: 'layouts/errors', locals: {object: @recipe_ingredient}  %>
 
-<%= form_for(@recipe_ingredient) do |f|%>
+<%= form_for([@recipe_ingredient.recipe, @recipe_ingredient]) do |f|%>
   <% if params[:recipe_id] %>
     <%= f.hidden_field :recipe_id %>
   <% else %>
@@ -9,6 +11,7 @@
       <%= f.collection_select :recipe_id, Recipe.all, :id, :name, include_blank: true %>
     </div>
   <% end %>
+
   <%= f.label :ingredient_id, "Select an Ingredient" %>
   <%= f.collection_select :ingredient_id, Ingredient.all, :id, :name, include_blank: true %>
 
@@ -16,6 +19,7 @@
     <%= i.label :name, "Or create a new ingredient" %>
     <%= i.text_field :name %>
   <% end %>
+  
     <div>
       <%= f.label :quantity %>
       <%= f.text_field :quantity %>
