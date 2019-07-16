@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :require_login
   
   def new
-    if @recipe = Recipe.find_by_id(params[:recipe_id])
+    if recipe
       @comment = @recipe.comments.build
     else
       @comment = Comment.new
@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.build(comment_params)
     if @comment.save
-      redirect_to comment_path(@comment)
+      redirect_to recipe_path(@comment.recipe)
     else
       render :new
     end
@@ -23,19 +23,16 @@ class CommentsController < ApplicationController
   end
 
   def index
-
     @users = User.all
     @recipes = Recipe.all
 
-    if !params[:user].blank?
+    if !params[:user].blank? #filtered by user
       @comments = Comment.by_user(params[:user])
-    elsif !params[:recipe].blank?
+    elsif !params[:recipe].blank? #filtered by recipe
       @comments = Comment.by_recipe(params[:recipe])
-    elsif @recipe = Recipe.find_by_id(params[:recipe_id])
-      #nested
+    elsif recipe #nested
       @comments = @recipe.comments
-    else
-      #it's not nested
+    else #it's not nested
       @comments = Comment.all
     end
     
@@ -44,6 +41,10 @@ class CommentsController < ApplicationController
   private
   def comment_params
     params.require(:comment).permit(:recipe_id, :content)
+  end
+
+  def recipe
+    @recipe = Recipe.find_by_id(params[:recipe_id])
   end
 
 end
