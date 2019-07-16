@@ -1,0 +1,13 @@
+<% if @recipe %>
+  <h1>Ingredients for <%= @recipe.name %></h1>
+
+  <%= form_tag destroy_multiple_recipe_ingredients_path, method: :delete do %>
+    <% @recipe.recipe_ingredients.each do |ri| %>
+      <%= check_box_tag "recipe_ingredients[]", ri.id %>
+      <%= ri.ingredient.name %><br/>
+    <% end %>
+    
+    <%= submit_tag "Delete selected" %>
+  <% end %>
+<% end %>
+
