@@ -1,9 +1,23 @@
-<h1>Wellcome to your Recipe Manager</h1>
+<div class="card text-center">
+  <div class="card-header">
+    <h1>Welcome to your Recipe Manager</h1>
+  </div>
+  <div class="card-body border-light mb-3">
+    <p class="card-text">Please login if you have an account with us or signup here</p>
+    <br />
+    <div class="btn btn-primary">
+      <%= link_to 'Login', login_path, :class => "btn text-white" %>
+    </div>
+    <div class="btn btn-primary">
+      <%= link_to 'Sign Up', signup_path, :class => "btn text-white" %> 
+    </div>
 
-<p>
-  Please, <%= link_to "Login", login_path %> if you have an account with us or <%= link_to "Signup", signup_path %> here.
-</p>
-<p>
-  You can login using your Github account
-  <%= link_to "Sign in with Github", "/auth/github" %>
-</p>
+    <br /><br /><br />
+
+    <p class="card-text">You can login using your Github account too</p>
+    <br />
+    <div class="btn btn-primary">
+      <%= link_to 'Login with Github', '/auth/github', :class => "btn text-white" %> 
+    </div>
+  </div>
+</div> 

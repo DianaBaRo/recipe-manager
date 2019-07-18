@@ -1,13 +1,19 @@
-<h1>Create a new category</h1>
-<%= render partial: 'layouts/errors', locals: {object: @category}  %>
+<%= render partial: 'layouts/navbar' %>
+<div class="container text-center">
+  <h1>New category</h1>
+  <br /><br />
+</div>
+<div class="container">
+  <%= render partial: 'layouts/errors', locals: {object: @category}  %>
 
-<%= form_for(@category) do |f|%>
-  <div>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-  <br>
+  <%= form_for(@category) do |f|%>
+    <div>
+      <%= f.label :name, "Category name:  " %>
+      <%= f.text_field :name %>
+    </div>
+    <br>
 
-  <%= f.submit %>
+    <button type=f.submit class="btn btn-primary">Create categoty</button>
 
-<% end %>
+  <% end %>
+</div>

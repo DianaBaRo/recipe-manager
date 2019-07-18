@@ -1,4 +1,11 @@
-<h1>Recipes for the <%= @category.name %> category:</h1>
-<% @recipes.each do |recipe| %>
-  <p><%= link_to recipe.name, category_recipe_path(@category, recipe) %></p>
-<% end %>
+<%= render partial: 'layouts/navbar' %>
+<div class="container text-center">
+  <h1>Recipes for <%= @category.name %> category</h1>
+</div>
+<div class="container">
+  <% @recipes.each do |recipe| %>
+    <ul class="list-group list-group-flush">
+      <%= link_to recipe.name, category_recipe_path(@category, recipe), :class => "list-group-item" %>
+    </ul>
+  <% end %>
+</div>

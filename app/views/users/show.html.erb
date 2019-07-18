@@ -1,21 +1,22 @@
-<p><%= flash[:error] %></p>
+<%= render partial: 'layouts/navbar' %>
+<div class="container text-center">
+  <% if flash[:error] %>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <%= flash[:error] %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
 
-<h1>Welcome <%= @user.name%></h1>
-
-<p><%= link_to "All our recipes", recipes_path %></p>
-<p><%= link_to "Check our newest recipe", newest_recipe_path %></p>
-
-<% if Category.all.size >= 1 %>
-  <%= link_to "Categories", categories_path %><br />
-<% end %>
-
-<p><%= link_to "Rate a recipe", new_rating_path %></p>
-
-<p><%= link_to "Comment a recipe", new_comment_path %></p>
-
-<% if @user.admin %>
-  <p><%= link_to "Create a new recipe", new_recipe_path %><br /></p>
-  <p><%= link_to "Create a new category", new_category_path %><br /></p>
-<% end %>
-  
-<p><%= link_to "Log out", logout_path, method: :delete %></p>
+  <h1>Welcome <%= @user.name%></h1>
+  <br />
+  <div class="list-group">
+    <%= link_to "Rate a recipe", new_rating_path, :class => "list-group-item list-group-item-action"%>
+    <%= link_to "Comment a recipe", new_comment_path, :class => "list-group-item list-group-item-action"%>
+    <% if @user.admin %>
+      <%= link_to "New recipe", new_recipe_path, :class => "list-group-item list-group-item-action"%>
+      <%= link_to "New category", new_category_path, :class => "list-group-item list-group-item-action"%>
+    <% end %>
+  </div>
+</div>

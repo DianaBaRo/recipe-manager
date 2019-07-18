@@ -1,13 +1,19 @@
 <% if @recipe %>
-  <h1>Ingredients for <%= @recipe.name %></h1>
-
-  <%= form_tag destroy_multiple_recipe_ingredients_path, method: :delete do %>
-    <% @recipe.recipe_ingredients.each do |ri| %>
-      <%= check_box_tag "recipe_ingredients[]", ri.id %>
-      <%= ri.ingredient.name %><br/>
+  <%= render partial: 'layouts/navbar' %>
+  <div class="container text-center">
+    <h1>Ingredients for <%= @recipe.name %></h1>
+    <br /><br />
+  </div>
+  <div class="container">
+    <%= form_tag destroy_multiple_recipe_ingredients_path, method: :delete do %>
+      <% @recipe.recipe_ingredients.each do |ri| %>
+        <%= check_box_tag "recipe_ingredients[]", ri.id %>
+        <%= ri.ingredient.name %><br/>
+      <% end %>
+      <br /><br />
+      <button type=submit_tag class="btn btn-primary">Delete selected</button>
+      
     <% end %>
-    
-    <%= submit_tag "Delete selected" %>
-  <% end %>
+  </div>
 <% end %>
 

@@ -1,22 +1,33 @@
-<%= render partial: 'layouts/errors', locals: {object: @user}  %>
+<div class="container text-center">
+  <%= render partial: 'layouts/errors', locals: {object: @user}  %>
 
-<h1>Sign up</h1>
+  <h1>Sign up</h1><br />
 
-<%= form_for(@user) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <%= form_for(@user) do |f| %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
 
-  <%= f.label :email %>
-  <%= f.email_field :email %>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+    </div>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %>
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </div>
 
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
+    <div class="form-group">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+    </div>
 
-  <p>Admin? <%= f.check_box :admin %></p><br />
-  <br />
+    <p>Admin? <%= f.check_box :admin %></p><br />
+    <br />
 
-  <%= f.submit "Sign Up" %>
-<% end %>
+    <button type=f.submit class="btn btn-primary">Sign Up</button>
+
+  <% end %>
+</div>

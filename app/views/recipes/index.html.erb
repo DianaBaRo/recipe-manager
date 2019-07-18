@@ -1,16 +1,22 @@
-<h1>Our recipes</h1>
+<%= render partial: 'layouts/navbar' %>
+<div class="container text-center">
+  <h1>Our recipes</h1>
+</div> 
 
-<%= form_tag("/recipes", method: "get") do %>
-  Recipes by title:
-  <%= text_field_tag :name, params[:name] %><br /><br />
-  Recipes by author:
-  <%= select_tag "user", options_from_collection_for_select(@users, "id", "name"), include_blank: true %><br /><br />
-  
-  <%= submit_tag "Filter" %>
-<% end %>
-
-<ol>
-  <% @recipes.each do |recipe| %>
-    <li><%= link_to recipe.name, recipe_path(recipe) %></li>
+<div class="container">
+  <%= form_tag("/recipes", method: "get", :class => "form") do %>
+    <p>Search by recipe name:</p>
+    <%= text_field_tag :name, params[:name], :class => "form-control mr-sm-2", :placeholder => "Recipe name" %><br /><br />
+    <p>Or by recipe author:  
+    <%= select_tag "user", options_from_collection_for_select(@users, "id", "name"), {include_blank: true} %></p><br />
+    <button type=submit_tag class="btn btn-outline-success my-2 my-sm-0">Search</button>
   <% end %>
-</ol>
+
+  <br /><br /><br />
+
+  <ul class="list-group list-group-flush">
+    <% @recipes.each do |recipe| %>
+      <%= link_to recipe.name, recipe_path(recipe), :class => "list-group-item" %>
+    <% end %>
+  </ul>
+</div>

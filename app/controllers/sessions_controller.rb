@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
   def new
+    if current_user
+      redirect_to user_path(current_user)
+    end
   end
 
   def create
@@ -15,7 +18,7 @@ class SessionsController < ApplicationController
 
         redirect_to user_path(@user)
       else
-        flash[:error] = "Sorry, login info was incorrect. Please try again."
+        flash[:error] = "Login info was incorrect. Please try again."
         render :new
       end
     end

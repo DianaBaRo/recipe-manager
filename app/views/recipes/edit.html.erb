@@ -1,7 +1,11 @@
 <% if @recipe %>
-
-  <h1>Edit <%= @recipe.name %></h1>
-  <%= render partial: 'layouts/errors', locals: {object: @recipe}  %>
-  <%= render 'form' %>
-  
+  <%= render partial: 'layouts/navbar' %>
+  <div class="container text-center">
+    <h1>Edit <%= @recipe.name %></h1>
+    <br /><br />
+  </div>
+  <div class="container">
+    <%= render partial: 'layouts/errors', locals: {object: @recipe}  %>
+    <%= render 'form' %>
+  </div>
 <% end %>

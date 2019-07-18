@@ -1,16 +1,23 @@
-<%= render partial: 'layouts/errors', locals: {object: @rating}  %>
+<%= render partial: 'layouts/navbar' %>
+<div class="container text-center">
+  <h1>New rating</h1>
+  <br /><br />
+</div>
+<div class="container">
+  <%= render partial: 'layouts/errors', locals: {object: @rating}  %>
 
-<%= form_for(@rating) do |f|%>
-  <div>
-    <%= f.label :recipe_id, "Select a Recipe" %>
-    <%= f.collection_select :recipe_id, Recipe.all, :id, :name, include_blank: true %>
-  </div>
-  <div>
-    <%= f.label :score %>
-    <%= f.number_field :score, min:1, max:5 %>
-  </div>
-  <br>
+  <%= form_for(@rating) do |f|%>
+    <div>
+      <%= f.label :recipe_id, "Select a Recipe:  " %>
+      <%= f.collection_select :recipe_id, Recipe.all, :id, :name, include_blank: true %>
+    </div>
+    <div>
+      <%= f.label :score, "Rating(1 - 5):  " %>
+      <%= f.number_field :score, min:1, max:5 %>
+    </div>
+    <br>
 
-  <%= f.submit %>
+    <button type=f.submit class="btn btn-primary">Rate recipe</button>
 
-<% end %>
+  <% end %>
+</div>

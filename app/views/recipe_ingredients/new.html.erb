@@ -1,31 +1,47 @@
-<p><%= flash[:error] %></p>
+<%= render partial: 'layouts/navbar' %>
+<div class="container text-center">
+  <h1>New ingredient</h1>
+  <br /><br />
+</div>
+<div class="container">
 
-<%= render partial: 'layouts/errors', locals: {object: @recipe_ingredient}  %>
-
-<%= form_for([@recipe_ingredient.recipe, @recipe_ingredient]) do |f|%>
-  <% if params[:recipe_id] %>
-    <%= f.hidden_field :recipe_id %>
-  <% else %>
-    <div>
-      <%= f.label :recipe_id, "Select a Recipe" %>
-      <%= f.collection_select :recipe_id, Recipe.all, :id, :name, include_blank: true %>
+  <% if flash[:error] %>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <%= flash[:error] %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
   <% end %>
 
-  <%= f.label :ingredient_id, "Select an Ingredient" %>
-  <%= f.collection_select :ingredient_id, Ingredient.all, :id, :name, include_blank: true %>
+  <%= render partial: 'layouts/errors', locals: {object: @recipe_ingredient}  %>
 
-  <%= f.fields_for :ingredient, @ingredient do |i| %>
-    <%= i.label :name, "Or create a new ingredient" %>
-    <%= i.text_field :name %>
-  <% end %>
-  
-    <div>
-      <%= f.label :quantity %>
-      <%= f.text_field :quantity %>
+  <%= form_for([@recipe_ingredient.recipe, @recipe_ingredient]) do |f|%>
+    <% if params[:recipe_id] %>
+      <%= f.hidden_field :recipe_id %>
+    <% else %>
+      <div class="form-group">
+        <%= f.label :recipe_id, "Select a Recipe" %>
+        <%= f.collection_select :recipe_id, Recipe.all, :id, :name, include_blank: true %>
+      </div>
+    <% end %>
+    
+    <div class="form-group">
+      <%= f.label :ingredient_id, "Select an ingredient  " %>
+      <%= f.collection_select :ingredient_id, Ingredient.all, :id, :name, include_blank: true %>
+    
+      <%= f.fields_for :ingredient, @ingredient do |i| %>
+        <%= i.label :name, "Or create a new one:  " %>
+        <%= i.text_field :name %>
+      <% end %>
     </div>
-  <br>
+      <div class="form-group">
+        <%= f.label :quantity %>
+        <%= f.text_field :quantity %>
+      </div>
+    <br>
 
-  <%= f.submit "Add ingredient" %>
+    <button type=f.submit class="btn btn-primary">Add ingredient</button>
 
-<% end %>
+  <% end %>
+</div>

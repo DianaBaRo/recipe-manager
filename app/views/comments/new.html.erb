@@ -1,20 +1,29 @@
-<%= render partial: 'layouts/errors', locals: {object: @comment}  %>
+<%= render partial: 'layouts/navbar' %>
+<div class="container text-center">
+  <h1>New comment</h1>
+  <br /><br />
+</div>
+<div class="container">
+  <%= render partial: 'layouts/errors', locals: {object: @comment}  %>
 
-<%= form_for([@comment.recipe, @comment]) do |f|%>
-  <% if params[:recipe_id] %>
-    <%= f.hidden_field :recipe_id %>
-  <% else %>
+  <%= form_for([@comment.recipe, @comment]) do |f|%>
+    <% if params[:recipe_id] %>
+      <%= f.hidden_field :recipe_id %>
+    <% else %>
+      <div>
+        <%= f.label :recipe_id, "Select a Recipe:  " %>
+        <%= f.collection_select :recipe_id, Recipe.all, :id, :name, include_blank: true %>
+        <br />
+      </div>
+    <% end %>
     <div>
-      <%= f.label :recipe_id, "Select a Recipe" %>
-      <%= f.collection_select :recipe_id, Recipe.all, :id, :name, include_blank: true %>
+      <br />
+      <%= f.label :content, "Comment:  " %>
+      <%= f.text_area :content, size: "38x3" %>
     </div>
+    <br>
+
+    <button type=f.submit class="btn btn-primary">Comment recipe</button>
+
   <% end %>
-  <div>
-    <%= f.label :content %>
-    <%= f.text_area :content, size: "25x10" %>
-  </div>
-  <br>
-
-  <%= f.submit %>
-
-<% end %>
+</div>
