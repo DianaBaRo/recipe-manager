@@ -2,7 +2,7 @@
 
 The app provides a database and web interface for users to:
 
-* Sign up, log in or log out securely as a nursery admin user or user.
+* Sign up, login or log out securely as an admin user or user.
 * This app includes a third party signup/login via Github thanks to the OmniAuth gem.
 * Users can see the recipes, rate and comment them.
 * Admin users can create, read, update, and delete (CRUD) a recipe, and create and delete ingredients and categories.
@@ -63,7 +63,7 @@ $ rake db:migrate
 $ rails s
 ```
 
-* You can play and create data via your console: `rails c`.
+* You can play with and create data via your console: `rails c`.
 
 ```
 $ rails c
