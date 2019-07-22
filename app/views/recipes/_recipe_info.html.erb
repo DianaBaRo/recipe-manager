@@ -51,9 +51,11 @@
       <div class="btn btn-primary">
         <%= link_to "Add an ingredient", new_recipe_recipe_ingredient_path(@recipe), :class => "btn text-white" %>
       </div>
-      <div class="btn btn-primary">
-        <%= link_to "Delete ingredient", recipe_recipe_ingredients_path(@recipe), :class => "btn text-white" %>
-      </div>
+      <% if not_empty @recipe.ingredients %>
+        <div class="btn btn-primary">
+          <%= link_to "Delete ingredient", recipe_recipe_ingredients_path(@recipe), :class => "btn text-white" %>
+        </div>
+      <% end %>
       <div class="btn btn-primary">
         <%= link_to "Edit recipe", edit_recipe_path(@recipe), :class => "btn text-white" %>
       </div>
