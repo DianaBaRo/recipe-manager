@@ -6,11 +6,10 @@
 <div class="container">
 
   <% if flash[:error] %>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-      <%= flash[:error] %>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+    <div class="alert alert-danger" role="alert">
+      <div id="error_explanation">
+        <%= flash[:error] %>
+      </div>
     </div>
   <% end %>
 
@@ -37,7 +36,7 @@
     </div>
       <div class="form-group">
         <%= f.label :quantity %>
-        <%= f.text_field :quantity %>
+        <%= f.number_field :quantity, min:1 %>
       </div>
     <br>
 
