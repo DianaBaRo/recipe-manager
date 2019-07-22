@@ -17,6 +17,7 @@ class RecipeIngredientsController < ApplicationController
     if selecting_and_creating_ingredient #user is selecting and creating an ingredient
       flash[:error] = "Please, select an ingredient or create a new one, not both."
       @recipe_ingredient = RecipeIngredient.new
+      @recipe_ingredient.recipe_id = params[:recipe_id]
       @ingredient = Ingredient.new
       render :new and return
     end
@@ -41,8 +42,11 @@ class RecipeIngredientsController < ApplicationController
   end
 
   def destroy_multiple
-    RecipeIngredient.destroy(params[:recipe_ingredients])
-    redirect_to user_path(current_user)
+    if params[:recipe_ingredients]
+      RecipeIngredient.destroy(params[:recipe_ingredients])
+      @recipe = params[:recipe_id]
+      redirect_to recipe_path(@recipe)
+    end
   end 
 
   private
