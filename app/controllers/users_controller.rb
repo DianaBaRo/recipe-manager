@@ -26,6 +26,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def most_popular_user
+    @user = User.most_popular_user
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)

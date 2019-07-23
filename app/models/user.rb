@@ -18,5 +18,7 @@ class User < ApplicationRecord
       user.password = SecureRandom.hex
     end
   end
+
+  scope :most_popular_user, -> { joins(:recipes).group("user_id").order("count(user_id) DESC").first }
   
 end

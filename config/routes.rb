@@ -33,4 +33,6 @@ Rails.application.routes.draw do
   resources :ratings, only: [:new, :create]
   
   get 'newest_recipe' => 'recipes#newest_recipe'
+
+  get 'most_popular_user' => 'users#most_popular_user'
 end
