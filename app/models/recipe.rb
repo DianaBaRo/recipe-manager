@@ -17,11 +17,7 @@ class Recipe < ApplicationRecord
 
   accepts_nested_attributes_for :categories
 
-  scope :newest, -> { order('created_at DESC') }
-
-  def self.latest
-    self.newest.first
-  end
+  scope :newest, -> { order('created_at DESC').limit(1) }
 
   def self.by_name(name)
     where(['name LIKE ?', "%#{name}%"])
