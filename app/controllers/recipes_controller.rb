@@ -36,15 +36,15 @@ class RecipesController < ApplicationController
   end
   
   def update
-    if recipe.update(recipe_params)
-      redirect_to recipe_path(recipe)
+    if @recipe.update(recipe_params)
+      redirect_to recipe_path(@recipe)
     else
       render :edit
     end
   end
 
   def destroy
-    recipe.destroy
+    @recipe.destroy
     redirect_to recipes_path
   end
 
